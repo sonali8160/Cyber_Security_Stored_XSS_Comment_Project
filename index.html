@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stored XSS Demo</title>
+
+    <style>
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+        .container{
+            width: 700px;
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        h1{
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        textarea{
+            width: 100%;
+
+            padding: 15px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            resize: none;
+        }
+
+        button{
+            width: 100%;
+
+            padding: 12px;
+
+            background: #007bff;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            margin-top: 15px;
+        }
+
+        button:hover{
+            background: #0056b3;
+        }
+
+        .comment-box{
+            background: #f8f9fa;
+
+            padding: 15px;
+
+            margin-top: 15px;
+
+            border-left: 5px solid #007bff;
+
+            border-radius: 10px;
+        }
+
+        h2{
+            color: #333;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Stored XSS Comment Section</h1>
+
+    <form method="POST">
+
+        <textarea
+            name="comment"
+            rows="5"
+            placeholder="Enter your comment here">
+        </textarea>
+
+        <button type="submit">
+            Submit Comment
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h2>User Comments</h2>
+
+    {% for comment in comments %}
+
+        <div class="comment-box">
+
+            {{ comment[0] | safe }}
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
